@@ -12,19 +12,19 @@ export class App extends Component {
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
-    name: '',
+
     filter: '',
   };
 
   addContact = newContact => {
-    if (this.state.contacts.find(contact => contact.name === newContact.name)) {
-      return alert(`${newContact.name} is already in contacts`);
-    }
-
     if (
-      this.state.contacts.find(contact => contact.number === newContact.number)
+      this.state.contacts.find(
+        contact =>
+          contact.name === newContact.name ||
+          contact.number === newContact.number
+      )
     ) {
-      return alert(`${newContact.number} is already in contacts`);
+      return alert(`${newContact.name} is already in contacts`);
     }
 
     this.setState(prevState => ({
@@ -32,7 +32,7 @@ export class App extends Component {
     }));
   };
 
-  getContact = evt => {
+  setFilter = evt => {
     const searchQuerry = evt.currentTarget.value;
     this.setState({ filter: searchQuerry });
   };
@@ -56,7 +56,7 @@ export class App extends Component {
         </Section>
         <Section title={'Contacts'}>
           <div>
-            <Filter filter={filter} getContact={this.getContact} />
+            <Filter filter={filter} getContact={this.setFilter} />
           </div>
           <Contactslist
             filteredContacts={filteredContacts}
