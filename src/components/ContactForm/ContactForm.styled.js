@@ -1,4 +1,4 @@
-import { Field, Form, ErrorMessage } from 'formik';
+import { Field, Form } from 'formik';
 import { styled } from 'styled-components';
 
 export const ContactFormStyled = styled(Form)`
